@@ -104,7 +104,7 @@
       <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07582939" vertical-offset="0" max-vertical-offset="1224">
+            <state vertical-scroll-proportion="0.07582939" vertical-offset="0" max-vertical-offset="1248">
               <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
@@ -499,7 +499,11 @@
       <created>1405759291803</created>
       <updated>1405759291803</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Push">
+      <created>1405760797178</created>
+      <updated>1405760797178</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -544,7 +548,8 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Yoga" />
-    <option name="LAST_COMMIT_MESSAGE" value="Yoga" />
+    <MESSAGE value="Push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Push" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
