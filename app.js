@@ -51,8 +51,9 @@ app.all('*', function(req, res, next) {
         var slug = req.params[0];
         if(slug == '/') slug = '/index';
 
-        var filePath = raneto.config.content_dir + slug +'.md',
-            pageList = raneto.getPages(slug);
+        var pageList = raneto.getPages(slug),
+            filePath = path.normalize(raneto.config.content_dir + slug);
+        if(!fs.existsSync(filePath)) filePath += '.md';
 
         if(slug == '/index' && !fs.existsSync(filePath)){
             return res.render('home', {
@@ -68,24 +69,30 @@ app.all('*', function(req, res, next) {
                     return next(err);
                 }
 
-                // File info
-                var stat = fs.lstatSync(filePath);
-                // Meta
-                var meta = raneto.processMeta(content);
-                content = raneto.stripMeta(content);
-                if(!meta.title) meta.title = raneto.slugToTitle(filePath);
-                // Content
-                content = raneto.processVars(content);
-                var html = marked(content);
+                // Process Markdown files
+                if(path.extname(filePath) == '.md'){
+                    // File info
+                    var stat = fs.lstatSync(filePath);
+                    // Meta
+                    var meta = raneto.processMeta(content);
+                    content = raneto.stripMeta(content);
+                    if(!meta.title) meta.title = raneto.slugToTitle(filePath);
+                    // Content
+                    content = raneto.processVars(content);
+                    var html = marked(content);
 
-                return res.render('page', {
-                    config: config,
-                    pages: pageList,
-                    meta: meta,
-                    content: html,
-                    body_class: 'page-'+ raneto.cleanString(slug),
-                    last_modified: moment(stat.mtime).format('Do MMM YYYY')
-                });
+                    return res.render('page', {
+                        config: config,
+                        pages: pageList,
+                        meta: meta,
+                        content: html,
+                        body_class: 'page-'+ raneto.cleanString(slug),
+                        last_modified: moment(stat.mtime).format('Do MMM YYYY')
+                    });
+                } else {
+                    // Serve static file
+                    res.sendfile(filePath);
+                }
             });
         }
     } else {
